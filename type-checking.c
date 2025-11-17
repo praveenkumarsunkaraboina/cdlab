@@ -4,13 +4,12 @@
 
 #define MAX 50
 
-typedef struct
+struct SymbolTable
 {
     char name[30];
     char type[10];
-} Symbol;
+} symbolTable[MAX];
 
-Symbol symbolTable[MAX];
 int symbolCount = 0;
 
 void addSymbol(char *name,char *type);
@@ -95,7 +94,7 @@ char* getType(char *name){
 
 int typeCheck(char *type1,char *op,char *type2){
     if(strcmp(op,"+")==0||strcmp(op,"-")==0||strcmp(op,"*")==0||strcmp(op,"/")==0){
-        if((strcmp(type1,"int")==0||strcmp(type1,"float")==0)&&(strcmp(type2,"int")==0||strcmp(type2,"float")==0)){
+        if((strcmp(type1,"int")==0||strcmp(type1,"float")==0||strcmp(type1,"char"))&&(strcmp(type2,"int")==0||strcmp(type2,"float")==0||strcmp(type2,"char"))){
             return 1;
         }
     }
@@ -109,5 +108,8 @@ char* resultType(char *type1,char *type2){
     if(strcmp(type1,"float")==0||strcmp(type2,"float")==0){
         return "float";
     }
-    return type1;
+    else if(strcmp(type1,"int")==0||strcmp(type2,"int")==0){
+        return "int";
+    }
+    return "char";
 }
