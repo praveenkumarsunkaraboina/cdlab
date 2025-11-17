@@ -37,12 +37,6 @@ void analyze(char *input){
     int i=0;
     while(input[i]!='\0'){
         char current_char = input[i];
-        
-        if(isOperator(current_char)){
-            printf("[OPERATOR]: %c\n",current_char);
-            i++;
-            continue;
-        }
 
         if(isDelimiter(current_char)){
             printf("[DELIMITER]: %c\n",current_char);
@@ -86,6 +80,11 @@ void analyze(char *input){
             printf("\n");
             continue;
         }
+        if(isOperator(current_char)){
+            printf("[OPERATOR]: %c\n",current_char);
+            i++;
+            continue;
+        }
         i++;
     }
 }
@@ -96,4 +95,5 @@ int main(){
     printf("---Output Tokens---\n");
     analyze(code);
     return 0;
+
 }
