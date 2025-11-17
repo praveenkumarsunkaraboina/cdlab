@@ -1,0 +1,31 @@
+//wordcount.l
+
+%{
+#include<stdio.h>
+int lineCount=0, wordCount=0, charCount=0;
+%}
+
+%%
+\n {lineCount++; charCount++}
+[ \t]+ {charCount+=yyleng;}
+[^ \t\n]+ {wordCount++; charCount+=yyleng;}
+%%
+
+int yywrap(){
+    return 1;
+}
+
+main(){
+    printf("Enter text: \n" );
+    yylex();
+
+    printf("\n== FILE STATISTICS ==\n);
+    printf("Number of lines: %d\n",lineCount);
+    printf("Number of words: %d\n",wordCount);
+    printf("Number of characters: %d\n",charCount);
+}
+
+
+lex wordcount.l
+cc lex.yy.c -ll
+./a.out
